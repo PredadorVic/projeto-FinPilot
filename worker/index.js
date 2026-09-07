@@ -20,7 +20,7 @@
 const ANTHROPIC_MODEL = 'claude-haiku-4-5-20251001'; // troque para 'claude-sonnet-5' se quiser respostas mais elaboradas (e mais caras)
 // Confira o nome do modelo atual em ai.google.dev antes de fixar — o Google
 // lança modelo com frequência e nomes antigos somem de circulação.
-const GEMINI_MODEL_DEFAULT = 'gemini-2.5-flash-lite';
+const GEMINI_MODEL_DEFAULT = 'gemini-3.5-flash-lite';
 const MAX_TOKENS = 700;
 const MAX_HISTORY_MESSAGES = 8; // últimas ~4 trocas de pergunta/resposta
 

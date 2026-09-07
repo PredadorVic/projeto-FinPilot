@@ -6,7 +6,7 @@ compatibility_date = "2024-11-01"
 # "anthropic" ou "gemini".
 [vars]
 AI_PROVIDER = "gemini"
-# GEMINI_MODEL = "gemini-2.5-flash-lite"   # descomente pra fixar um modelo do Gemini;
+# GEMINI_MODEL = "gemini-3.5-flash-lite"   # descomente pra fixar um modelo do Gemini;
                                             # confira o nome atual em ai.google.dev antes de trocar
 
 # Segredos: NUNCA vão neste arquivo. Configure depois do primeiro deploy,
