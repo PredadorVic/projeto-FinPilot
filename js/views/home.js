@@ -3,6 +3,7 @@
 import { brl, escapeHTML, formatDate, monthKeyFromDate, today } from '../utils.js';
 import { financialTotals } from '../calculations.js';
 import { metric, heroMetric, emptyState, reliabilityChip, statusChip } from '../ui.js';
+import { insightCardHTML } from '../actions/insights.js';
 
 function renderIncomeItem(item, occurrenceStatus) {
   const status = occurrenceStatus(item);
@@ -94,5 +95,6 @@ export function renderHome(state, occurrenceStatus) {
         </div>
         <div class="item-actions"><button class="secondary" data-action="openSettings" type="button">Configurar perfil financeiro</button></div>
       </div>
-    </div>`;
+    </div>
+    ${insightCardHTML(state)}`;
 }

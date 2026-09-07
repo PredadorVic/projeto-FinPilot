@@ -28,6 +28,8 @@ export function createInitialState() {
     profile: { spendingJoys: '', savingStyle: '', priorities: '', dependents: '', notes: '', updatedAt: null },
     // Últimas trocas com a IA, só pra dar continuidade à conversa (não é obrigatório manter).
     aiHistory: [],
+    // Análise proativa (gerada sozinha, sem o usuário perguntar — ver actions/insights.js).
+    aiInsight: { text: '', generatedAt: null, forFingerprint: '', error: '' },
     // Lembra o último preenchimento de cada simulador, por conveniência.
     simulatorInputs: {}
   };
@@ -55,7 +57,8 @@ function migrate(raw) {
     history: Array.isArray(raw.history) ? raw.history : [],
     simulatorInputs: raw.simulatorInputs || {},
     profile: { ...base.profile, ...(raw.profile || {}) },
-    aiHistory: Array.isArray(raw.aiHistory) ? raw.aiHistory : []
+    aiHistory: Array.isArray(raw.aiHistory) ? raw.aiHistory : [],
+    aiInsight: { ...base.aiInsight, ...(raw.aiInsight || {}) }
   };
 }
 

@@ -7,6 +7,7 @@ import { getState, getSelectedMonth, getCurrent, setCurrent, onRender, requestRe
 import { saveState } from './state.js';
 import { openModal, closeModal, registerActionDispatcher } from './ui.js';
 import { actions } from './actions/index.js';
+import { maybeAutoRefreshInsight } from './actions/insights.js';
 
 import { renderHome } from './views/home.js';
 import { renderIncome } from './views/income.js';
@@ -110,6 +111,7 @@ function render() {
   if (avatar) avatar.textContent = initials(state.user.name);
   updateAlertBadge(state);
   bindPage();
+  if (getCurrent() === 'home') maybeAutoRefreshInsight();
 }
 
 onRender(render);

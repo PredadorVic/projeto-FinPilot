@@ -3,7 +3,7 @@
 // Cache "network-first": online, sempre busca a versão mais nova (e atualiza
 // o cache); offline, cai pro que já foi salvo. Isso evita o problema clássico
 // de PWA de "editei o arquivo e o app continua mostrando a versão antiga".
-const CACHE_NAME = 'finpilot-shell-v5-1';
+const CACHE_NAME = 'finpilot-shell-v5-2';
 
 const APP_SHELL = [
   './',
@@ -39,6 +39,7 @@ const APP_SHELL = [
   './js/actions/settings.js',
   './js/actions/data.js',
   './js/actions/assistant.js',
+  './js/actions/insights.js',
   './js/actions/simuladores.js'
 ];
 

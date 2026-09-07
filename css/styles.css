@@ -93,4 +93,8 @@ nav{display:grid;gap:6px}.nav-btn{border:0;background:transparent;color:var(--mu
 .sim-result table{margin-top:8px}
 .sim-result p{margin:8px 0 0}
 
+.ai-insight-card{border-color:color-mix(in srgb,var(--purple) 30%,var(--line));background:linear-gradient(145deg,var(--panel),var(--purple-bg))}
+.ai-insight-card ol,.ai-insight-card ul{margin:6px 0;padding-left:20px}
+.ai-insight-card li{margin:4px 0;line-height:1.5}
+
 @media print{.sidebar,.bottom-nav,.fab,.top-actions{display:none!important}}

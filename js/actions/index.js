@@ -11,6 +11,7 @@ import { cardActions } from './cards.js';
 import { settingsActions } from './settings.js';
 import { dataActions } from './data.js';
 import { assistantActions } from './assistant.js';
+import { insightActions } from './insights.js';
 import { openCompoundInterest, openPurchaseDecision, openDebtVsInvest, openRetirementPlan, openFixedIncomeCompare } from './simuladores.js';
 
 export const actions = {
@@ -22,6 +23,7 @@ export const actions = {
   ...settingsActions,
   ...dataActions,
   ...assistantActions,
+  ...insightActions,
 
   openCompoundInterest,
   openPurchaseDecision,
