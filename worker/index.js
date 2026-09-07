@@ -86,21 +86,28 @@ async function callGemini(env, systemWithContext, trimmedHistory, message) {
     { role: 'user', parts: [{ text: message }] }
   ];
 
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-    method: 'POST',
-    headers: {
-      'x-goog-api-key': env.GEMINI_API_KEY,
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      system_instruction: { parts: [{ text: systemWithContext }] },
-      contents,
-      generationConfig: { maxOutputTokens: MAX_TOKENS }
-    })
-  });
+  let response;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: {
+        'x-goog-api-key': env.GEMINI_API_KEY,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: systemWithContext }] },
+        contents,
+        generationConfig: { maxOutputTokens: MAX_TOKENS }
+      })
+    });
+    if (response.status !== 503 || attempt === 1) break;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
 
   if (!response.ok) {
-    throw new Error(`Erro da API do Gemini (${response.status}): ${await response.text()}`);
+    const details = await response.text();
+    const suffix = response.status === 503 ? ' Tente novamente em alguns instantes.' : '';
+    throw new Error(`Erro da API do Gemini (${response.status}): ${details}${suffix}`);
   }
   const data = await response.json();
   const candidate = (data.candidates || [])[0];
