@@ -1,0 +1,15 @@
+{
+  "name": "finpilot",
+  "version": "5.0.0",
+  "description": "FinPilot — painel financeiro pessoal (sem dependências, sem build).",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "deploy": "wrangler deploy --config worker/wrangler.toml",
+    "preview": "wrangler dev --config worker/wrangler.toml"
+  },
+  "devDependencies": {
+    "wrangler": "^4.129.0"
+  }
+}

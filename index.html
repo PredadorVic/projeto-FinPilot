@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#12181F" />
+  <meta name="description" content="FinPilot — gestão e planejamento financeiro pessoal com separação entre dinheiro garantido e dinheiro possível." />
+  <title>FinPilot — Painel Financeiro Pessoal</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // Aplica o tema salvo ANTES da primeira pintura, pra não piscar claro
+    // e depois trocar pra escuro. Vai no <html> (não no <body>, que ainda
+    // nem existe nesse ponto do parsing) e usa a MESMA classe "dark" que
+    // js/main.js alterna em tempo de execução.
+    (function () {
+      try {
+        var raw = localStorage.getItem('finpilot-v5-user-owned-data') || localStorage.getItem('finpilot-v4-user-owned-data');
+        var data = raw ? JSON.parse(raw) : null;
+        if (data && data.settings && data.settings.theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (err) {
+        /* localStorage indisponível (ex.: modo privado) — segue com o tema padrão */
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">F</div>
+        <div><strong>FinPilot</strong><span>Decisões melhores</span></div>
+      </div>
+      <nav id="desktopNav" aria-label="Navegação principal"></nav>
+      <div class="sidebar-card">
+        <span class="eyebrow">Regra de segurança</span>
+        <strong>Garantido ≠ possível</strong>
+        <p>Entradas previstas, variáveis e eventuais nunca aumentam seu dinheiro disponível antes de serem recebidas.</p>
+      </div>
+      <button class="ghost full" id="themeToggle" type="button">Alternar tema</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow" id="headerDate"></span>
+          <h1 id="pageTitle">Visão geral</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="alertsBtn" type="button" aria-label="Abrir alertas">🔔<span class="badge" id="alertBadge">0</span></button>
+          <button class="avatar" id="profileBtn" type="button" aria-label="Abrir perfil financeiro">FP</button>
+        </div>
+      </header>
+
+      <section id="content" aria-live="polite"></section>
+    </main>
+
+    <button class="fab" id="quickAdd" type="button" aria-label="Adicionar lançamento">+</button>
+    <nav class="bottom-nav" id="mobileNav" aria-label="Navegação no celular"></nav>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop" role="presentation">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" tabindex="-1"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
